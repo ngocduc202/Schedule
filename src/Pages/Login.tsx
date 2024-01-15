@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import LoginImage from '../img/Login.jpg';
 import Logo from '../img/rangdong.png';
 
 const Login = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
   const toggleMode = () => {
     setIsLoginMode(prevMode => !prevMode);
+  };
+
+  const toggleForgotPasswordModal = () => {
+    setShowForgotPasswordModal(prevState => !prevState);
   };
 
   return (
@@ -52,7 +57,7 @@ const Login = () => {
                   </span>
                   <span className='text-sm text-gray-500'>Remember Me</span>
                 </label>
-                <a href="//" className='text-sm no-underline text-[#696cff] mt-3'>Forgot Password?</a>
+                <a href="#" className='text-sm no-underline text-[#696cff] mt-3' onClick={toggleForgotPasswordModal}>Forgot Password?</a>
               </div>}
               <button className='w-full inline-flex items-center justify-center text-white bg-[#696cff] font-bold leading-3 rounded-lg py-4 text-[17px]'>
                 {isLoginMode ? 'Sign in' : 'Register'}
@@ -71,7 +76,27 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {showForgotPasswordModal && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-8 max-w-[400px] rounded-md">
+            <h2 className="text-2xl font-semibold mb-4">Forgot Password</h2>
+            <p className="text-gray-600 mb-4">
+              Enter your email address, and we'll send you a link to reset your password.
+            </p>
+            <input type="email" className='w-full border h-[45px] border-gray-300 rounded-md p-2 outline-none mb-4' placeholder='Enter your email' />
+            <button className='w-full bg-[#696cff] text-white font-bold rounded-lg py-2'>
+              Send Reset Link
+            </button>
+            <button className="mt-5 text-gray-600 flex items-center justify-end w-full" onClick={toggleForgotPasswordModal}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
+
+
   );
 };
 
