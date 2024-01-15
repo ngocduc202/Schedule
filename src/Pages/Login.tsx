@@ -1,8 +1,14 @@
-import React from 'react'
-import LoginImage from '../img/Login.jpg'
-import Logo from '../img/rangdong.png'
+import React, { useState } from 'react';
+import LoginImage from '../img/Login.jpg';
+import Logo from '../img/rangdong.png';
 
 const Login = () => {
+  const [isLoginMode, setIsLoginMode] = useState(true);
+
+  const toggleMode = () => {
+    setIsLoginMode(prevMode => !prevMode);
+  };
+
   return (
     <div className='w-full h-screen relative overflow-hidden'>
       <div className='flex min-h-screen h-full overflow-hidden relative'>
@@ -15,12 +21,31 @@ const Login = () => {
               <img src={Logo} alt="Logo" className='w-[90x] h-[70px] object-contain' />
               <h5 className='ml-2 text-gray-700 leading-none font-bold text-2xl '>Schedule</h5>
             </div>
-            <h6 className='font-semibold text-gray-500 text-xl'>Welcome to Rang Dong</h6>
-            <p className='mt-7 font-semibold text-gray-400'>Please sign-in to your account</p>
+            <h6 className='font-semibold text-gray-500 text-xl'>
+              {isLoginMode ? 'Welcome to Rang Dong' : 'Create an Account'}
+            </h6>
+            <p className='mt-7 font-semibold text-gray-400'>
+              {isLoginMode ? 'Please sign-in to your account' : 'Please fill in the form to register'}
+            </p>
             <form action="" className='w-full mt-5'>
-              <input type="text" className='w-full border h-[55px] border-gray-300 rounded-md p-2 outline-none' placeholder='Username' />
-              <input type="text" className='w-full border h-[55px] border-gray-300 mt-5 rounded-md p-2 outline-none' placeholder='Password' />
-              <div className='mb-4 flex items-center flex-wrap justify-between'>
+              {/* ... existing input fields for login ... */}
+              {isLoginMode ?
+                // Additional login-related content or controls if needed
+                <>
+                  <input type="text" className='w-full border h-[55px] border-gray-300 rounded-md p-2 outline-none' placeholder='Username' />
+                  <input type="password" className='w-full border h-[55px] border-gray-300 mt-5 rounded-md p-2 outline-none' placeholder='Password' />
+                </>
+
+                : (
+                  // Registration-related input fields
+                  <>
+                    <input type="text" className='w-full border h-[55px] border-gray-300 rounded-md p-2 outline-none' placeholder='Email' />
+                    <input type="text" className='w-full border h-[55px] border-gray-300 rounded-md p-2 outline-none mt-4' placeholder='Username' />
+                    <input type="password" className='w-full border h-[55px] border-gray-300 rounded-md p-2 outline-none mt-4 mb-6' placeholder='Passsword' />
+                    {/* Add other registration fields as needed */}
+                  </>
+                )}
+              {isLoginMode && <div className='mb-4 flex items-center flex-wrap justify-between'>
                 <label htmlFor="" className='inline-flex items-center cursor-pointer mt-5 gap-2'>
                   <span className='inline-flex items-center justify-center relative bg-transparent outline-0 p-[9px] rounded-md bg-gray-300'>
                     <input type="checkbox" name="" id="" className='absolute w-full h-full border-gray-300' />
@@ -28,12 +53,18 @@ const Login = () => {
                   <span className='text-sm text-gray-500'>Remember Me</span>
                 </label>
                 <a href="//" className='text-sm no-underline text-[#696cff] mt-3'>Forgot Password?</a>
-              </div>
-              <button className='w-full inline-flex items-center justify-center text-white bg-[#696cff] font-bold leading-3 rounded-lg py-4 text-[17px]'>Sign in</button>
+              </div>}
+              <button className='w-full inline-flex items-center justify-center text-white bg-[#696cff] font-bold leading-3 rounded-lg py-4 text-[17px]'>
+                {isLoginMode ? 'Sign in' : 'Register'}
+              </button>
               <div className='flex items-center flex-wrap justify-center gap-3 mt-3'>
-                <p className='font-semibold text-sm text-gray-300'>New on our platform?</p>
+                <p className='font-semibold text-sm text-gray-300'>
+                  {isLoginMode ? 'New on our platform?' : 'Already have an account?'}
+                </p>
                 <p className='font-semibold text-gray-300'>
-                  <a href="//" className='text-sm no-underline text-[#696cff]'>Create an account</a>
+                  <span className='text-sm no-underline text-[#696cff] cursor-pointer' onClick={toggleMode}>
+                    {isLoginMode ? 'Create an account' : 'Sign in'}
+                  </span>
                 </p>
               </div>
             </form>
@@ -41,7 +72,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
