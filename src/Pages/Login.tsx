@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import LoginImage from '../img/Login.jpg';
-import Logo from '../img/rangdong.png';
+import Logo from '../img/LogoShedule.png';
 
 const Login = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -24,7 +24,6 @@ const Login = () => {
           <div className='m-auto max-w-[400px]'>
             <div className='mb-3 flex items-center'>
               <img src={Logo} alt="Logo" className='w-[90x] h-[70px] object-contain' />
-              <h5 className='ml-2 text-gray-700 leading-none font-bold text-2xl '>Schedule</h5>
             </div>
             <h6 className='font-semibold text-gray-500 text-xl'>
               {isLoginMode ? 'Welcome to Rang Dong' : 'Create an Account'}
